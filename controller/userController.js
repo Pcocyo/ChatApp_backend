@@ -1,4 +1,5 @@
 const User = require('../models/userModel')
+
 const jwt = require('jsonwebtoken')
 
 const register = async (req, res) => {
@@ -31,6 +32,27 @@ const login = async (req,res)=>{
     try{
         const {username,password} = req.body
         const user = await User.findOne({username:username})
+        .populate(
+            {
+                path:'conversation',
+                populate:{
+                    path:'users',
+                    select:'username _id image'
+                }
+            }
+        )
+        .populate(
+            {
+                path:'conversation',
+                populate:{
+                    path:'message',
+                    populate:{
+                        path:'sender reciever',
+                        select:'username'
+                    }
+                }
+            }
+        )
         if(!user){
             throw new Error('user with name ' + username +  ' not found')
         }
