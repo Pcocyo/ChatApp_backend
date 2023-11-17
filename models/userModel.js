@@ -28,10 +28,11 @@ const UserSchema = new mongoose.Schema(
         type:String,
         default:''
       },
-      conversation:{
+      conversation:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Conversation'
-      }
+      }]
+      
 
 },{timestamps:true})
 
