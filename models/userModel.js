@@ -24,6 +24,15 @@ const UserSchema = new mongoose.Schema(
         default:"",
         maxLength: [250,"bio must not exceed 250 character"]
       },
+      image:{
+        type:String,
+        default:''
+      },
+      conversation:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Conversation'
+      }
+
 },{timestamps:true})
 
 module.exports = mongoose.model("user", UserSchema);
