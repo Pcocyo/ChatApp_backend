@@ -7,7 +7,7 @@ const UserSchema = new mongoose.Schema(
         type: String,
         required: true,
         unique: true,
-        minLength: [6,"Username must be above 6 character"],
+        minLength: [4,"Username must be above 6 character"],
         maxLength: [40,"Username must be less than 40 character"],
         validator:{
           validaor: (val) => !contains(val," "),
@@ -35,4 +35,4 @@ const UserSchema = new mongoose.Schema(
 
 },{timestamps:true})
 
-module.exports = mongoose.model("user", UserSchema);
+module.exports = mongoose.model("User", UserSchema);

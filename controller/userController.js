@@ -16,6 +16,9 @@ const register = async (req, res) => {
         const toReturn={
             username:user.username,
             _id:user._id,
+            biography:user.biography,
+            image:user.image,
+            conversation:user.conversation,
             token : jwt.sign({username:username,_id:user._id},'123')
         }
       return res.send(toReturn);
@@ -34,6 +37,9 @@ const login = async (req,res)=>{
         let toReturn = {
             username:user.username,
             _id:user._id,
+            biography:user.biography,
+            image:user.image,
+            conversation:user.conversation,
             token : jwt.sign({username:user.username,_id:user._id},'123')
         }
         res.send(toReturn)
