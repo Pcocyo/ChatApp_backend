@@ -31,7 +31,12 @@ const UserSchema = new mongoose.Schema(
       conversation:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Conversation'
-      }]
+      }],
+      friend:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
+      }
+      ]
       
 
 },{timestamps:true})

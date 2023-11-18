@@ -70,4 +70,22 @@ const login = async (req,res)=>{
     }
 }
 
-module.exports = {register,login}
+async function findUser(req,res){
+    try{
+        const {userToFind, userId} = req.body;
+        const toExclude = []
+        const user = await User.findById(userId)
+
+        //user to exclude
+        toExclude.push(String(user._id))
+        user.friend.forEach((ele)=>toExclude.push(String(ele)))
+        //end of user to exclude
+
+        let userFound = await User.find({username:{$regex:new RegExp(userToFind,'i')}})
+        userFound = userFound.filter((user)=> !toExclude.includes(String(user._id))) // return only user relevent
+        res.send(userFound)
+    }catch(err){
+        res.send({error:err.message})
+    }
+}
+module.exports = {register,login,findUser}

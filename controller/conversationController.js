@@ -3,7 +3,16 @@ const userModel = require('../models/userModel')
 
 async function createConversation(req,res){
     try{
+        let updateUser
+        async function addFriend(id,idToAdd){
+            let user = await userModel.findById(id)
+            user.friend.push(idToAdd)
+            updateUser = await user.save()
+        }
+
         const {user_id,authUser} = req.body
+        addFriend(user_id,authUser._id)
+        addFriend(authUser._id,user_id)
 
         const arrUser=[user_id,authUser._id]
         const conversation = await ConversationModel.create({
@@ -12,12 +21,12 @@ async function createConversation(req,res){
         for (index in arrUser){
             let user = await userModel.findById(arrUser[index])
             user.conversation.push(conversation._id)
-            let updateUser = await user.save()
+            updateUser = await user.save()
         }
         const toReturn = await ConversationModel.findById(conversation._id).populate({path:'users',select:'-password'})
         res.send({toReturn})
     }catch(err){
-        res.send({error:err.message})
+        res.send({error:err.stack})
     } 
 }
 
