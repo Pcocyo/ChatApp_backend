@@ -37,7 +37,7 @@ async function getConversation(req,res){
         }
         const {conversation_id} = req.body
         const conversation = await ConversationModel.findById(conversation_id)
-        .populate({path:'users',select:'-password'})
+        .populate({path:'users',select:'-password'}).populate({path:'message',populate:{path:'sender reciever'}})
         res.send({conversation})
 
     }catch(err){
