@@ -51,7 +51,7 @@ io.on('connection', (socket) => {
 });
 
 const port = 8080
-const mongoDbPort = 'mongodb://127.0.0.1:27017/ChatMeUp'
+const mongoDbPort = 'mongodb+srv://joshuaelson46:h2T54T1nVnN3zDPA@cluster0.vonmdjd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
 server.listen(port,()=>{    
     console.log(`listen to ${port}`)
 })
@@ -63,3 +63,5 @@ mongoose.connect(mongoDbPort)
         console.log('error detected')
         console.log(e.message)
 })
+
+
