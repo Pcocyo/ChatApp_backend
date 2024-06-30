@@ -57,7 +57,9 @@ server.listen(port,()=>{
 })
 
 
-mongoose.connect(mongoDbPort)
+mongoose.connect(mongoDbPort,{
+    serverSelectionTimeoutMS: 60000
+})
     .then(console.log('MongoDb Connected'))
     .catch((e)=>{
         console.log('error detected')

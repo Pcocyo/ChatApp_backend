@@ -2,6 +2,10 @@ const User = require('../models/userModel')
 
 const jwt = require('jsonwebtoken')
 
+const options = {
+    socketTimeoutMS: 20000 // Timeout after 20 seconds
+  };
+
 const register = async (req, res) => {
     try {
         const { username, password } = req.body;
@@ -31,7 +35,7 @@ const register = async (req, res) => {
 const login = async (req,res)=>{
     try{
         const {username,password} = req.body
-        const user = await User.findOne({username:username})
+        const user = await User.findOne({username:username},options)
         .populate(
             {
                 path:'conversation',
