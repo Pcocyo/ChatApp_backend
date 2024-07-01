@@ -12,13 +12,8 @@ const messageRoute = require('./route/messageRouter')
 app.use(express.json())
 app.use(cors())
 const server = http.createServer(app);
-const io = socketIo(server, {
-    cors: {
-      origin: "https://chat-app-git-master-elsons-projects-28b62194.vercel.app", // Replace with your React app's origin
-      methods: ["GET", "POST"]
-    }
-  });
-
+const io = socketIo(server)
+io.origins('*');
 app.use('/api/user',userRoute)
 app.use('/api/conversation',tokenMiddleware,conversationRoute)
 app.use('/api/message',tokenMiddleware,messageRoute)
