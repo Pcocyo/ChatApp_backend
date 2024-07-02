@@ -14,7 +14,7 @@ app.use(cors())
 const server = http.createServer(app);
 const io = socketIo(server, {
     cors: {
-      origin: ["https://chat-fm5sunnjc-elsons-projects-28b62194.vercel.app"], // Replace with your React app's origin
+      origin: ["chat-app-git-master-elsons-projects-28b62194.vercel.app"], // Replace with your React app's origin
       methods: ["GET", "POST"]
     }
   });
